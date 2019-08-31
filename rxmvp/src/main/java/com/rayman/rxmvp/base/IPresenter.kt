@@ -86,7 +86,9 @@ interface IPresenter<out V : IView> : LifecycleObserver {
 
         override fun addDisposable(disposable: Disposable) {
             if (disposableList.size >= disposableCount) {
-                disposableList.remove(disposableList.first())
+                val first = disposableList.first()
+                first.dispose()
+                disposableList.remove(first)
             }
             disposableList.add(disposable)
         }
